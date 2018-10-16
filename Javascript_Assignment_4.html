@@ -1,0 +1,65 @@
+<html>
+<head>
+
+	<script type="text/javascript">
+	var username;
+	var email;
+	var userData=new Array();
+
+	// Function to store multiple records
+	function storeDetails(){	
+		
+
+		try{
+			username=document.getElementById("username").value;
+			email=document.getElementById("email").value;
+
+			if (!isNameValid(username)){
+				throw("Invalid Name");
+			}
+
+			if (!isEmailAddress(email)){
+				throw("Invalid Email");
+			}
+
+			var dat=new Date();
+			var user = { 'username': username, 'email': email, 'timestamp': dat };
+			userData.push(user);
+			// Put the object into storage
+			localStorage.setItem('userData', JSON.stringify(userData));
+		}
+		catch(e){
+			alert(e);
+		}
+	}
+
+	// function to validate username
+	function isNameValid(name) {
+	   	var pattern = /^[0-9a-zA-Z ]*$/;
+	   	return pattern.test(name);
+	}
+
+	// function to validate email
+	function isEmailAddress(email) {
+	   	var pattern =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	   	return pattern.test(email);
+	}
+
+	// function to retrive all the records
+	function listDetails(){
+	    	var retrievedObject = localStorage.getItem('userData');
+		console.log('All Data: ', JSON.parse(retrievedObject));
+	}
+
+	</script>
+</head>
+<body>
+
+<form>
+	<input type="text" placeholder="Enter your name" id="username"/><br>
+	<input type="text" placeholder="Enter your email" id="email"/><br>
+	<button type="button" onclick="storeDetails()">Add Record</button>
+	<button type="button" onclick="listDetails()">Show All Details</button>
+</form>
+</body>
+</html>

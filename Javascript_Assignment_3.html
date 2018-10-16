@@ -1,0 +1,45 @@
+<html>
+<head>
+
+	<script type="text/javascript">
+	var intervals,interval2,interval3;
+	function addhandlers() {
+  		document.getElementById("openTabBtn").addEventListener("click", function(){
+			tab1=window.open("https://www.google.com/","_blank");
+			tab2=window.open("https://www.bing.com/","_blank");
+			tab3=window.open("https://www.yahoo.com/","_blank");
+
+			// Callback intervals to close tabs in every 3 seconds
+			intervals=setInterval(function(){
+				interval2=setInterval(function(){
+					intervals3=setInterval(function(){
+						tab3.close();
+						clearInterval(intervals3);},3000);
+				tab2.close();
+				clearInterval(interval2);},3000);
+			tab1.close();
+			clearInterval(intervals); }, 3000);			
+			}
+			
+		,true);
+
+		document.getElementById("closeTabBtn").addEventListener("click", function(){
+			clearInterval(intervals);
+			clearInterval(interval2);			
+			clearInterval(intervals3);
+			alert("inside");						
+			}
+		,true);
+	}
+	window.onload=addhandlers;
+
+	</script>
+</head>
+<body>
+
+<form>
+	<button type="button" onclick="openTabs()" id="openTabBtn">Click to Open Multiple Tab</button><br>
+	<button type="button" onclick="closeTabs()" id="closeTabBtn">Click to Close Close Execution</button>
+</form>
+</body>
+</html>
