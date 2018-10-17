@@ -3,7 +3,7 @@
 
 	<script type="text/javascript">
 
-	function occurenceArray(){	
+	function countNumberOccurence(){	
 		var sequencel,array_len,i,j;
 		var array=new Array();
 
@@ -16,22 +16,19 @@
 			alert(e);
 		}
 		
-		
-
 		array=sequence.split(",");		
 		array_len=array.length;
 
 		// Calling count function
-		array=foo(array);
-
-		console.log("Array  Occurence");
-		for (i=0;i<array_len;i++){
-			console.log(array[0][i]+"   "+array[1][i]);
+		array=countArrayNumbers(array);
+		
+		for (i=0;i<array.length;i++){
+			document.write("Element: "+array[0][i]+" Count: "+array[1][i]+"<br>");
 		}
 		
 	}
 
-	function foo(arr) {
+	function countArrayNumbers(arr) {
 	    var a = [], b = [], prev;
 
 	    arr.sort();
@@ -52,10 +49,10 @@
 	</script>
 </head>
 <body>
-
+<h2>Enter a sequence of number seperated by comma</h2>
 <form>
-	<input type="text" placeholder="enter numbers with comma seperator" id="arraynumber"/><br>
-	<button type="button" onclick="occurenceArray()">Click Me!</button>
+	<input type="text" placeholder="Enter numbers with comma seperator" id="arraynumber"/><br>
+	<button type="button" onclick="countNumberOccurence()">Count Occurence</button>
 </form>
 </body>
 </html>

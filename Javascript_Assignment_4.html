@@ -7,7 +7,7 @@
 	var userData=new Array();
 
 	// Function to store multiple records
-	function storeDetails(){	
+	function storeUserRecord(){	
 		
 
 		try{
@@ -27,6 +27,7 @@
 			userData.push(user);
 			// Put the object into storage
 			localStorage.setItem('userData', JSON.stringify(userData));
+			alert("Record successfully stored");
 		}
 		catch(e){
 			alert(e);
@@ -46,7 +47,7 @@
 	}
 
 	// function to retrive all the records
-	function listDetails(){
+	function listAllRecords(){
 	    	var retrievedObject = localStorage.getItem('userData');
 			
 			json=JSON.parse(retrievedObject);
@@ -57,23 +58,22 @@
 			document.write("<td>Timestamp</td></tr>");
 			
 			for (let i=0;i<json.length;i++){
-				document.write("<tr><td>"+json[0].username+"</td>");
-				document.write("<td>"+json[1].email+"</td>");
-				document.write("<td>"+json[2].timestamp+"</td></tr>");	
+				document.write("<tr><td>"+json[i].username+"</td>");
+				document.write("<td>"+json[i].email+"</td>");
+				document.write("<td>"+json[i].timestamp+"</td></tr>");	
 			}
 			document.write("</table>");
-			
 	}
 
 	</script>
 </head>
 <body>
-
+<h2>Store your data on local storage</h2>
 <form>
 	<input type="text" placeholder="Enter your name" id="username"/><br>
 	<input type="text" placeholder="Enter your email" id="email"/><br>
-	<button type="button" onclick="storeDetails()">Add Record</button>
-	<button type="button" onclick="listDetails()">Show All Details</button>
+	<button type="button" onclick="storeUserRecord()">Add Record</button>
+	<button type="button" onclick="listAllRecords()">Show All Details</button>
 	<table id="json"></table>
 </form>
 </body>
