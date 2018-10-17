@@ -48,7 +48,21 @@
 	// function to retrive all the records
 	function listDetails(){
 	    	var retrievedObject = localStorage.getItem('userData');
-		console.log('All Data: ', JSON.parse(retrievedObject));
+			
+			json=JSON.parse(retrievedObject);
+			
+			document.write("<table border=2>");
+			document.write("<tr><td>Username</td>");
+			document.write("<td>Email</td>");
+			document.write("<td>Timestamp</td></tr>");
+			
+			for (let i=0;i<json.length;i++){
+				document.write("<tr><td>"+json[0].username+"</td>");
+				document.write("<td>"+json[1].email+"</td>");
+				document.write("<td>"+json[2].timestamp+"</td></tr>");	
+			}
+			document.write("</table>");
+			
 	}
 
 	</script>
@@ -60,6 +74,7 @@
 	<input type="text" placeholder="Enter your email" id="email"/><br>
 	<button type="button" onclick="storeDetails()">Add Record</button>
 	<button type="button" onclick="listDetails()">Show All Details</button>
+	<table id="json"></table>
 </form>
 </body>
 </html>
