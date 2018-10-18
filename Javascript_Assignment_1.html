@@ -1,58 +1,52 @@
 <html>
-<head>
+	<head>
+		<script type="text/javascript">
+			function countNumberOccurence() {
+				var sequencel, array_len, i, j;
+				var array;
 
-	<script type="text/javascript">
+				try {
+					sequence = document.getElementById("arraynumber").value;
+					if (sequence === "")
+						throw ("Empty string");
+				}catch (e) {
+					alert(e);
+				}
 
-	function countNumberOccurence(){	
-		var sequencel,array_len,i,j;
-		var array=new Array();
+				array = sequence.split(",");
+				array_len = array.length;
 
-		try{
-			sequence=document.getElementById("arraynumber").value;
-			if(sequence=="")
-			throw("Empty string");
-		}
-		catch(e){
-			alert(e);
-		}
-		
-		array=sequence.split(",");		
-		array_len=array.length;
+				// Calling count function
+				array = getCount(array);
+				array[0].sort();
+				console.log("Array  Occurence");
+				for (i = 0; i < array_len; i++) {
+					console.log(array[0][i] + "   " + array[1][i]);
+				}
 
-		// Calling count function
-		array=countArrayNumbers(array);
-		
-		for (i=0;i<array.length;i++){
-			document.write("Element: "+array[0][i]+" Count: "+array[1][i]+"<br>");
-		}
-		
-	}
+			}
 
-	function countArrayNumbers(arr) {
-	    var a = [], b = [], prev;
+			function getCount(arr) {
+				var a = [], b = [], prev;
 
-	    arr.sort();
-	    for ( var i = 0; i < arr.length; i++ ) {
-        	if ( arr[i] !== prev ) {
-        	    a.push(arr[i]);
-        	    b.push(1);
-        	} else {
-        	    b[b.length-1]++;
-        	}
-        	prev = arr[i];
-    	    }	
-
-	    return [a, b];
-	  }	
-
-
-	</script>
-</head>
-<body>
-<h2>Enter a sequence of number seperated by comma</h2>
-<form>
-	<input type="text" placeholder="Enter numbers with comma seperator" id="arraynumber"/><br>
-	<button type="button" onclick="countNumberOccurence()">Count Occurence</button>
-</form>
-</body>
+				arr.sort();
+				for (var i = 0; i < arr.length; i++) {
+					if (arr[i] !== prev) {
+						a.push(arr[i]);
+						b.push(1);
+					} else {
+						b[b.length - 1]++;
+					}
+					prev = arr[i];
+				}
+				return [a, b];
+			}
+		</script>
+	</head>
+	<body>
+		<form>
+			<input type="text" placeholder="enter numbers with comma seperator" id="arraynumber" /><br>
+			<button type="button" onclick="countNumberOccurence()">Click Me!</button>
+		</form>
+	</body>
 </html>

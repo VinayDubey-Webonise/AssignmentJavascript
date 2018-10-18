@@ -1,80 +1,68 @@
 <html>
-<head>
+  <head>
+    <script type="text/javascript">
+      var username;
+      var email;
+      var userData=new Array();
 
-	<script type="text/javascript">
-	var username;
-	var email;
-	var userData=new Array();
+      // Function to store multiple records
+      function storeDetails(){
+        try{
+          var dat=new Date();
+          var user = { 'username': username, 'email': email, 'timestamp': dat };
 
-	// Function to store multiple records
-	function storeUserRecord(){	
-		
+          username=document.getElementById("username").value;
+          email=document.getElementById("email").value;
+          if (!isNameValid(username)){
+            throw("Invalid Name");
+          }
+          if (!isEmailAddress(email)){
+            throw("Invalid Email");
+          }
+          userData.push(user);
+          // Put the object into storage
+          localStorage.setItem('userData', JSON.stringify(userData));
+        }catch(e) {
+          alert(e);
+        }
+      }
 
-		try{
-			username=document.getElementById("username").value;
-			email=document.getElementById("email").value;
+      // function to validate username
+      function isNameValid(name) {
+        var pattern = /^[0-9a-zA-Z ]*$/;
+        return pattern.test(name);
+      }
 
-			if (!isNameValid(username)){
-				throw("Invalid Name");
-			}
+      // function to validate email
+      function isEmailAddress(email) {
+        var pattern =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        return pattern.test(email);
+      }
 
-			if (!isEmailAddress(email)){
-				throw("Invalid Email");
-			}
+        // function to retrive all the records
+      function listDetails(){
+        var retrievedObject = localStorage.getItem('userData');
 
-			var dat=new Date();
-			var user = { 'username': username, 'email': email, 'timestamp': dat };
-			userData.push(user);
-			// Put the object into storage
-			localStorage.setItem('userData', JSON.stringify(userData));
-			alert("Record successfully stored");
-		}
-		catch(e){
-			alert(e);
-		}
-	}
-
-	// function to validate username
-	function isNameValid(name) {
-	   	var pattern = /^[0-9a-zA-Z ]*$/;
-	   	return pattern.test(name);
-	}
-
-	// function to validate email
-	function isEmailAddress(email) {
-	   	var pattern =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-	   	return pattern.test(email);
-	}
-
-	// function to retrive all the records
-	function listAllRecords(){
-	    	var retrievedObject = localStorage.getItem('userData');
-			
-			json=JSON.parse(retrievedObject);
-			
-			document.write("<table border=2>");
-			document.write("<tr><td>Username</td>");
-			document.write("<td>Email</td>");
-			document.write("<td>Timestamp</td></tr>");
-			
-			for (let i=0;i<json.length;i++){
-				document.write("<tr><td>"+json[i].username+"</td>");
-				document.write("<td>"+json[i].email+"</td>");
-				document.write("<td>"+json[i].timestamp+"</td></tr>");	
-			}
-			document.write("</table>");
-	}
-
-	</script>
-</head>
-<body>
-<h2>Store your data on local storage</h2>
-<form>
-	<input type="text" placeholder="Enter your name" id="username"/><br>
-	<input type="text" placeholder="Enter your email" id="email"/><br>
-	<button type="button" onclick="storeUserRecord()">Add Record</button>
-	<button type="button" onclick="listAllRecords()">Show All Details</button>
-	<table id="json"></table>
-</form>
-</body>
+        json=JSON.parse(retrievedObject);
+        document.write("<table border=2>");
+        document.write("<tr><td>Username</td>");
+        document.write("<td>Email</td>");
+        document.write("<td>Timestamp</td></tr>");
+        for (let i=0;i<json.length;i++){
+          document.write("<tr><td>"+json[i][0].username+"</td>");
+          document.write("<td>"+json[i].email+"</td>");
+          document.write("<td>"+json[i].timestamp+"</td></tr>");
+        }
+        document.write("</table>");
+      }
+    </script>
+  </head>
+  <body>
+    <form>
+      <input type="text" placeholder="Enter your name" id="username"/><br>
+      <input type="text" placeholder="Enter your email" id="email"/><br>
+      <button type="button" onclick="storeDetails()">Add Record</button>
+      <button type="button" onclick="listDetails()">Show All Details</button>
+    </form>
+    </body>
 </html>
