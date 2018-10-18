@@ -1,0 +1,54 @@
+<html>
+  <head>
+  <script type="text/javascript">
+  function add(){
+    var no1,no2,answer;
+
+    try{
+      no1=document.getElementById("no1").value;
+      no2=document.getElementById("no2").value;
+      if(isNaN(no1) || isNaN(no2) || no1==='' || no2===''){
+        throw("Enter Valid Number");
+      }else{
+        answer=parseInt(no1)+parseInt(no2);
+        document.write("The sum is "+answer);
+      }
+    }catch(e){
+      alert(e);
+    }
+  }
+
+  function sub(){
+    var no1,no2,answer;
+
+    try{
+      no1=document.getElementById("no1").value;
+      no2=document.getElementById("no2").value;
+      if(isNaN(no1) || isNaN(no2)){
+        throw("Empty Valid Number");
+      }
+      else{
+        answer=parseInt(no1)-parseInt(no2);
+        document.write("The sub is "+answer);
+      }
+
+    }
+    catch(e){
+    alert(e);
+    }
+  }
+
+  </script>
+  </head>
+  <body>
+
+    <form>
+      <input type="text" placeholder="Enter no. 1" id="no1"/>
+      <input type="text" placeholder="Enter no. 2" id="no2"/>
+      <input type="text" placeholder="Answer" id="ans"/>
+      <br>
+      <button type="button" onclick="add()">Add</button>
+      <button type="button" onclick="sub()">Sub</button>
+    </form>
+    </body>
+</html>
